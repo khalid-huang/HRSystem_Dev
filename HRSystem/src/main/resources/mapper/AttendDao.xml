@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--设置为UserDao接口方法提供sql语句配置-->
+<mapper namespace="com.kevin.HRSystem.dao.AttendDao">
+
+    <insert id="save" parameterType="Attend" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO attend_inf(duty_day, punch_time, is_come, type_id, emp_id) VALUES (#{dutyDay}, #{punchTime}, #{isCome}, #{attendType.id}, #{employee.id})
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE from attend_inf WHERE attend_id=#{id}
+    </delete>
+
+    <update id="update" parameterType="User">
+        UPDATE attend_inf SET duty_day=#{dutyDay}, punch_time=#{punchTime}, is_come=#{isCome}, type_id=#{attendType.id}, emp_id=#{employee.id}
+    </update>
+
+    <!--查询语句 start -->
+    <select id="findAll">
+        SELECT * FROM application_inf
+    </select>
+
+
+    <select id="findById" resultMap="attendResultMap" parameterType="long">
+        SELECT * FROM attend_inf WHERE attend_id=#{id}
+    </select>
+
+    <select id="findByEmpAndMonth" resultMap="attendResultMap">
+        SELECT * FROM attend_inf a, employee_inf e WHERE a.emp_id = e.emp_id and e.emp_id = #{employee.id} and SUBSTRING(a.duty_day, 0, 7) = #{month}
+    </select>
+
+    <select id="findByEmpAndDutyDay" resultMap="attendResultMap">
+        SELECT * FROM attend_inf a, employee_inf e WHERE a.emp_id = e.emp_id and e.emp_id = #{employee.id} and a.duty_day = #{dutyDay}
+    </select>
+
+    <select id="findByEmpAndDutyDayAndCome" resultMap="attendResultMap">
+        SELECT * FROM attend_inf a, employee_inf e WHERE a.emp_id = e.emp_id and e.emp_id = #{employee.id} and a.duty_day = #{dutyDay} and a.is_come = #{isCome}
+    </select>
+
+    <select id="findByEmpUnAttend" resultMap="attendResultMap">
+        SELECT * FROM attend_inf a, employee_inf e WHERE a.emp_id = e.emp_id and e.emp_id = #{employee.id} and a.type_id = #{attendType.id} DATE_SUB(CURDATE(),  INTERVAL 3 DAY) &lt;= DATA(a.duty_day)
+    </select>
+    <!--查询语句 end-->
+
+    <resultMap id="attendResultMap" type="com.kevin.HRSystem.model.Attend">
+        <id property="id" column="attend_id"/>
+        <result property="dutyDay" column="duty_day"/>
+        <result property="punchTime" column="punch_time"/>
+        <result property="isCome" column="is_come"/>
+        <association property="attendType" javaType="com.kevin.HRSystem.model.AttendType">
+            <id property="id" column="type_id"/>
+        </association>
+        <association property="employee" javaType="com.kevin.HRSystem.model.Employee">
+            <id property="id" column="emp_id"/>
+        </association>
+    </resultMap>
+
+</mapper>

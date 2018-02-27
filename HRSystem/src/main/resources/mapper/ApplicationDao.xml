@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kevin.HRSystem.dao.ApplicationDao">
+    <insert id="save" parameterType="Application" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO application_inf(app_result,attend_id,type_id) VALUES (#{applicationReason}, #{applicationResult} #{attent.id}, #{attentType.id})
+    </insert>
+
+    <update id="update" parameterType="Application">
+        UPDATE application_inf SET app_result=#{applicationResult}, app_reason=#{applicationReason}, type_id=#{attendType.id}, attend_id=#{attend.id} WHERE app_id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM application_inf WHERE app_id=#{id}
+    </delete>
+
+    <!--查询语句 start -->
+    <select id="findAll">
+        SELECT * FROM application_inf
+    </select>
+
+    <select id="findById" parameterType="long" resultMap="applicationResultMap">
+        SELECT * FROM application_inf WHERE app_id=#{id}
+    </select>
+
+    <select id="findByEmp" parameterType="com.kevin.HRSystem.model.Employee" resultMap="applicationWithDetailResultMap">
+        SELECT * FROM application_inf app, attend_inf att, employee_inf emp WHERE emp.emp_id=#{id} and emp.emp_id = att.emp_id = emp.emp_id and app.attend_id = att.attend_id
+    </select>
+
+    <!--查询语句 end -->
+
+
+    <resultMap type="Application" id="applicationResultMap">
+        <id property="id" column="app_id"/>
+        <result property="applicationReason" column="app_reason"/>
+        <result property="applicationResult" column="app_result"/>
+        <association property="attendType" javaType="AttendType">
+            <id property="id" column="attend_id"/>
+        </association>
+        <association property="attend" javaType="Attend">
+            <id property="id" column="type_id"/>
+        </association>
+    </resultMap>
+
+    <resultMap type="Application" id="applicationWithDetailResultMap">
+        <id property="id" column="app_id"/>
+        <result property="applicationReason" column="app_reason"/>
+        <result property="applicationResult" column="app_result"/>
+        <association property="attendType" javaType="AttendType">
+            <id property="id" column="type_id"/>
+            <result property="amerceAmount" column="amerce_amount"/>
+            <result property="typeName" column="type_name"/>
+        </association>
+        <association property="attend" javaType="Attend">
+            <id property="id" column="attend_id"/>
+            <result property="dutyDay" column="duty_day"/>
+            <result property="punchTime" column="punch_time"/>
+            <result property="isCome" column="is_come"/>
+            <association property="attendType" javaType="AttendType">
+                <id property="id" column="type_id"/>
+            </association>
+            <association property="employee" javaType="Employee">
+                <id property="id" column="emp_id"/>
+            </association>
+        </association>
+    </resultMap>
+
+</mapper>

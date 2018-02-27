@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.kevin.HRSystem.dao.AttendTypeDao">
+    <insert id="save" parameterType="AttendType" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO attend_type_inf(amerce_amount, type_name) VALUES (#{amerceAmount}, #{typeName})
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM attend_type_inf WHERE type_id=#{id}
+    </delete>
+
+    <update id="update" parameterType="AttendType">
+        UPDATE attend_type_inf SET amerce_amount=#{amerceAmount}, type_name=#{typeName} WHERE type_id=#{id}
+    </update>
+
+    <!--查询语句 start-->
+    <select id="findAll">
+        SELECT * FROM application_inf
+    </select>
+
+
+    <select id="findById" parameterType="long" resultMap="attendTypeResultMap">
+        SELECT * FROM attend_type_inf WHERE attend_type_inf.type_id=#{id}
+    </select>
+
+    <!--查询语句 end-->
+
+    <resultMap id="attendTypeResultMap" type="AttendType">
+        <id property="id" column="type_id"/>
+        <result property="amerceAmount" column="amerce_amount"/>
+        <result property="typeName" column="type_name"/>
+    </resultMap>
+
+</mapper>
