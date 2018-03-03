@@ -6,6 +6,7 @@ import com.kevin.HRSystem.service.EmpManagerService;
 import com.kevin.HRSystem.vo.AttendVo;
 import com.kevin.HRSystem.vo.PaymentVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@Service("EmpManagerService")
 public class EmpManagerServiceImpl implements EmpManagerService {
     @Resource
     private ApplicationDao applicationDao;

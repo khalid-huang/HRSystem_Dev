@@ -7,6 +7,7 @@ import com.kevin.HRSystem.service.MgrManagerService;
 import com.kevin.HRSystem.vo.ApplicationVo;
 import com.kevin.HRSystem.vo.EmployeeVo;
 import com.kevin.HRSystem.vo.SalaryVo;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
+@Service("MgrManagerService")
 public class MgrManagerServiceImpl implements MgrManagerService {
     @Resource
     private ApplicationDao applicationDao;
