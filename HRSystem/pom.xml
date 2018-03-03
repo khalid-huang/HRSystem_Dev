@@ -43,6 +43,19 @@
       <version>7.0</version>
     </dependency>
 
+    <!--导入jstl-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+
     <!-- 单元测试 -->
     <dependency>
       <groupId>junit</groupId>
