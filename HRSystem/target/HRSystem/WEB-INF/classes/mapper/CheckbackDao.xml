@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--设置为UserDao接口方法提供sql语句配置-->
+<mapper namespace="com.kevin.HRSystem.dao.CheckbackDao">
+
+    <insert id="save" parameterType="Checkback" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO checkback_inf(app_id, check_result, check_reason, mgr_id) VALUES  #(#{application.id}, #{checkResult}, #{checkReason},#{manager.id})
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE from checkback_inf WHERE check_id=#{id}
+    </delete>
+
+    <update id="update" parameterType="Checkback">
+        UPDATE checkback_inf set app_id=#{application.id}, check_result=#{checkResult}, check_reason=#{checkReason}, mgr_id=#{manager.id}
+    </update>
+
+    <!--查询语句 start -->
+    <select id="findAll">
+        SELECT * FROM application_inf
+    </select>
+
+    <select id="findById" resultMap="checkBackResultMap" parameterType="long">
+        SELECT * FROM checkback_inf WHERE check_id=#{id}
+    </select>
+
+    <!--查询语句 end-->
+
+    <resultMap id="checkBackResultMap" type="com.kevin.HRSystem.model.Checkback">
+        <id property="id" column="check_id"/>
+        <result property="checkResult" column="check_result"/>
+        <result property="checkReason" column="check_reason"/>
+        <association property="application" javaType="com.kevin.HRSystem.model.Application">
+            <id property="id" column="app_id"/>
+        </association>
+        <association property="manager" javaType="com.kevin.HRSystem.model.Manager">
+            <id property="id" column="mrg_id"/>
+        </association>
+    </resultMap>
+
+
+</mapper>
