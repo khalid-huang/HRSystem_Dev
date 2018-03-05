@@ -29,6 +29,7 @@
                 </c:if>
                 <div class="center">
                     <%--测试一下这个的话是怎么调用的，普通的form的action是调用什么的--%>
+                    <%--经过下面的这种也是可以的，跟form没有本质区别，可能主要是在数据绑定上的区别吧--%>
                     <%--<form action="processLogin" method="POST">--%>
                         <%--用户名： <input type="text" name="name">--%>
                         <%--<br />--%>
@@ -49,7 +50,7 @@
                                 <td><input type="submit" value="登录"></td>
                                 <td><input type="reset" value="重填"></td>
                             </tr>
-                        </table>                        
+                        </table>
                     </form:form>
                 </div>
             </td>

@@ -15,6 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.kevin.HRSystem.constant.ConstantManager.*;
+
 @Service("EmpManagerService")
 public class EmpManagerServiceImpl implements EmpManagerService {
     @Resource
@@ -33,12 +35,12 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     private PaymentDao paymentDao;
 
 
-    public int validLogin(Manager manager) {
-        if(null != managerDao.findByNameAndPass(manager.getName(), manager.getPassword())) {
+    public int validLogin(Employee employee) {
+        if(null != managerDao.findByNameAndPass(employee.getName(), employee.getPassword())) {
             return LOGIN_MGR;
         }
 
-        if(null != employeeDao.findByNameAndPass(manager.getName(), manager.getPassword())) {
+        if(null != employeeDao.findByNameAndPass(employee.getName(), employee.getPassword())) {
             return LOGIN_EMP;
         }
 
