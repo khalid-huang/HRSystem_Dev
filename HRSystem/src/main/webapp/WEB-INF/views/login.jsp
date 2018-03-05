@@ -5,7 +5,7 @@
   Time: 下午5:55
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -18,7 +18,7 @@
 <body>
     <%@include file="header.jsp"%>
     <table width="960" align="center"
-           background="${pageContext.request.contextPath}/images/bodybg.jpg">
+           background="${pageContext.request.contextPath}/resources/images/bodybg.jpg">
         <tr>
             <td>
                 请输入用户名和密码来登录<br />
@@ -42,7 +42,7 @@
                                 <td><form:input path="name"/></td>
                             </tr>
                             <tr>
-                                <td><form:label path="password">Name</form:label></td>
+                                <td><form:label path="password">Password</form:label></td>
                                 <td><form:password path="password"/></td>
                             </tr>
                             <tr>

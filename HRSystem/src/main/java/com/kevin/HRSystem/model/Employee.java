@@ -58,6 +58,10 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [id=" + this.id + ", name=" + this.name + ", password=" + this.password + ", type=" + this.type + ", salary=" + this.salary + ", managerId=" + this.manager.getId() +  ", managerName=" + this.manager.getName() + "]";
+        String rsl = "Employee [id=" + this.id + ", name=" + this.name + ", password=" + this.password + ", type=" + this.type + ", salary=" + this.salary;
+        if(this.manager != null) {
+            rsl += ", managerId=" + this.manager.getId() +  ", managerName=" + this.manager.getName() + "]";
+        }
+        return rsl;
     }
 }

@@ -15,7 +15,7 @@
 <body>
 <%@include file="header.jsp"%>
 <table width="960" align="center"
-       background="${pageContext.request.contextPath}/images/bodybg.jpg">
+       background="${pageContext.request.contextPath}/resources/images/bodybg.jpg">
     <tr>
         <td colspan="3">请单击后面链接开始使用系统<a href="loginPage">登录系统</a></td>
     </tr>

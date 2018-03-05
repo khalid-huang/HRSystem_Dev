@@ -6,10 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<link href="${pageContext.request.contextPath}/images/css.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/css.css" rel="stylesheet" type="text/css">
 <body topmargin="0">
 <table width="960" align="center"
-       background="${pageContext.request.contextPath}/images/bodybg.jpg">
+       background="${pageContext.request.contextPath}/resources/images/bodybg.jpg">
     <tr>
         <td width="167" height="94" rowspan="2"><a href="http://www.crazyit.org">
             <img src="http://www.crazyit.org/logo.jpg" width="160" height="80" border="0" align="right"></a></td>

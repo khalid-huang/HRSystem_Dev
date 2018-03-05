@@ -1,12 +1,12 @@
-.pt9 {
-	font-size: 9pt;
+.pt11 {
+	font-size: 11pt;
 }
 .title {
-	font-size: 9pt;
+	font-size: 11pt;
 	color:#333333;
 }
 a:link {
-	font-size: 9pt;
+	font-size: 11pt;
 	color: #0099CC;
 	text-decoration: none;
 }
@@ -21,7 +21,7 @@ a:hover {
 
 input {
 	border: 1px solid #666666;
-	font-size: 9pt;
+	font-size: 10pt;
 	color: #333333;
 }
 select {
@@ -30,18 +30,21 @@ select {
 .error {
 	border: 1px dashed #FF9900;
 	background-color: #99CCFF;
-	font-size: 9pt;
+	font-size: 11pt;
 	color: #FF0000;
 }
 td {
-	font-size: 9pt;
+	font-size: 11pt;
 	text-align: center;
+}
+tr {
+	background-color: #ffffff;
 }
 body {
 	background-image: url(images/bg.jpg);
 }
 .mytitle {
-	font-size: 12pt;
+	font-size: 14pt;
 	font-weight: bold;
 	color: #0099FF;
 }
