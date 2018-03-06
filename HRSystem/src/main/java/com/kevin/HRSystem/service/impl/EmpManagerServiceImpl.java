@@ -37,10 +37,14 @@ public class EmpManagerServiceImpl implements EmpManagerService {
 
     public int validLogin(Employee employee) {
         if(null != managerDao.findByNameAndPass(employee.getName(), employee.getPassword())) {
+            System.out.println("EmpManagerService: manager");
+            System.out.println(employee);
             return LOGIN_MGR;
         }
 
         if(null != employeeDao.findByNameAndPass(employee.getName(), employee.getPassword())) {
+            System.out.println("EmpManagerService:employee");
+            System.out.println(employee);
             return LOGIN_EMP;
         }
 

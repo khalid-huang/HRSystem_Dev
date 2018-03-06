@@ -26,11 +26,11 @@
     </select>
 
     <select id="findByNameAndPass" resultMap="EmployeeResultMap">
-        SELECT * FROM  employee_inf WHERE emp_name=#{name} and emp_pass=#{password}
+        SELECT * FROM  employee_inf WHERE emp_name=#{name} and emp_pass=#{password} and emp_type=1
     </select>
 
     <select id="findByName" resultMap="EmployeeResultMap">
-        SELECT * FROM employee_inf WHERE emp_name=#{name}
+        SELECT * FROM employee_inf WHERE emp_name=#{name} and emp_type=1
     </select>
 
     <!--根据mgr_id查找员工-->

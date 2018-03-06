@@ -5,7 +5,7 @@
   Time: 下午5:55
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -22,9 +22,9 @@
         <tr>
             <td>
                 请输入用户名和密码来登录<br />
-                <c:if test="${message.size() > 0}">
+                <c:if test="${error.length() > 0}">
                     <div class="error">
-                            <c:out value="${message}"></c:out>
+                            <c:out value="${error}"></c:out>
                     </div>
                 </c:if>
                 <div class="center">
