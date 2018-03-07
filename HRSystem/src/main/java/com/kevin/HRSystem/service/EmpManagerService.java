@@ -60,7 +60,7 @@ public interface EmpManagerService {
      * @param employeeName 员工名
      * @return 该员工最近三天的非正常打卡
      */
-    List<AttendVo> unAttend(String employeeName);
+    List<AttendVo> getUnAttend(String employeeName);
 
 
     /**

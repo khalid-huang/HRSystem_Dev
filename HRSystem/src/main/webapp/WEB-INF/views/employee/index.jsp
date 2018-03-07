@@ -21,9 +21,9 @@
         </tr>
         <tr>
             <td>
-                <c:if test="${error.length()>0}">
+                <c:if test="${message.length()>0}">
                     <div class="error">
-                        <c:out value="${error}"></c:out>
+                        <c:out value="${message}"></c:out>
                     </div>
                 </c:if>
             </td>

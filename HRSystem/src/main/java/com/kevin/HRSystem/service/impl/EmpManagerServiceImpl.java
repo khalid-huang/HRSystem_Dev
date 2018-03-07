@@ -193,7 +193,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
      * @param employeeName 员工名
      * @return 该员工的最近三天的非正常打卡
      */
-    public List<AttendVo> unAttend(String employeeName) {
+    public List<AttendVo> getUnAttend(String employeeName) {
         AttendType type = attendTypeDao.findById(1);
         Employee employee = employeeDao.findByName(employeeName);
 

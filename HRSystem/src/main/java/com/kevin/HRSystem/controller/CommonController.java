@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -59,14 +60,22 @@ public class CommonController {
             return modelAndView;
         } else {
             message = "用户名与密码不匹配，登录失败";
-            modelAndView = new ModelAndView("error");
+            modelAndView = new ModelAndView("errorTest");
             modelAndView.addObject("message", message);
             return modelAndView;
         }
     }
 
-//    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-//    public ModelAndView logout() {
-//
-//    }
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout() {
+
+    }
+
+    //这里应该是返回json
+    //进行审批
+    @RequestMapping(value = "/checkApp", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkApp() {
+
+    }
 }
