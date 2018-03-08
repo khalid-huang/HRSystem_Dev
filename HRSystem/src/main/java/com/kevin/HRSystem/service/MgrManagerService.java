@@ -24,7 +24,7 @@ public interface MgrManagerService {
      * @param manager 经理
      * @return 部门上个月的工资
      */
-    List<SalaryVo> getSalaryByManger(String manager);
+    List<SalaryVo> getSalarysByManger(String manager);
 
     /**
      * 根据经理返回部门的全部员工
@@ -38,7 +38,7 @@ public interface MgrManagerService {
      * @param manager 经理名
      * @return 该部门的全部申请
      */
-    List<ApplicationVo> getApplicationByManager(String manager);
+    List<ApplicationVo> getApplicationsByManager(String manager);
 
     /**
      * 处理申请

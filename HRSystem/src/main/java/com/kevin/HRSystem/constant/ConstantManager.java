@@ -4,7 +4,7 @@ public class ConstantManager {
     //登录失败
     public  static final int LOGIN_FALT = 0;
     //以普通员工登录
-    public static final int LOGIN_EMP = 0;
+    public static final int LOGIN_EMP = 1;
     //以经理登录
     public static final int LOGIN_MGR = 2;
 

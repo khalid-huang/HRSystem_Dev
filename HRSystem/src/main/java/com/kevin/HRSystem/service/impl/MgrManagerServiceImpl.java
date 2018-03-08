@@ -43,7 +43,7 @@ public class MgrManagerServiceImpl implements MgrManagerService {
     }
 
     //获取上个月的全部工资记录
-    public List<SalaryVo> getSalaryByManger(String manager) {
+    public List<SalaryVo> getSalarysByManger(String manager) {
         Manager m = managerDao.findByName(manager);
         if(m == null) {
             throw new HrException("您是经理吗？或您还没有登录");
@@ -93,7 +93,7 @@ public class MgrManagerServiceImpl implements MgrManagerService {
      * @param manager 经理名
      * @return
      */
-    public List<ApplicationVo> getApplicationByManager(String manager) {
+    public List<ApplicationVo> getApplicationsByManager(String manager) {
         Manager m = managerDao.findByName(manager);
         if(m == null) {
             throw new HrException("您是经理吗？或您还没有登录");

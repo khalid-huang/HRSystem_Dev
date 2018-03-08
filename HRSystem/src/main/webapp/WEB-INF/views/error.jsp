@@ -25,7 +25,8 @@
         <td height="315">
             <div class="pt11" style="color:red;width:600px;height:300px;
 	border:1px solid black;border-radius:10px">
-                <s:property value="exception.message"/>
+                ${requestScope.message}
+                <%--<s:property value="exception.message"/>--%>
         </td>
     </tr>
     <tr>

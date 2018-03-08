@@ -12,7 +12,7 @@ public interface PaymentDao extends BaseDao<Payment>{
      * @param employee 员工
      * @return 返回该员工对应的月结薪水集合
      */
-    List<Payment> findByEmp(Employee employee);
+    List<Payment> findByEmp(@Param("employee") Employee employee);
 
 
     /**

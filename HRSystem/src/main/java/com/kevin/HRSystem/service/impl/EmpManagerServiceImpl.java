@@ -179,6 +179,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
         Employee employee = employeeDao.findByName(employeeName);
 
         List<Payment> payments = paymentDao.findByEmp(employee);
+        System.out.println(payments);
 
         List<PaymentVo> result = new ArrayList<PaymentVo>();
 

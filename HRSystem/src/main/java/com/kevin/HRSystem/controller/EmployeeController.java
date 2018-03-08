@@ -32,19 +32,19 @@ public class EmployeeController {
     @Resource
     private EmpManagerService empManagerService;
 
-    @RequestMapping(value = "/employeePunch",method = RequestMethod.GET)
-    public ModelAndView employeePunch(HttpServletRequest request) {
-
-        String username = (String)request.getSession().getAttribute(WebConstant.USER);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String dutyDay = simpleDateFormat.format(new Date());
-        int punchIsValid = empManagerService.validPunch(username, dutyDay);
-
-        ModelAndView modelAndView = new ModelAndView("employee/punch");
-        modelAndView.addObject("punchIsValid", punchIsValid);
-        return modelAndView;
-
-    }
+//    @RequestMapping(value = "/employeePunch",method = RequestMethod.GET)
+//    public ModelAndView employeePunch(HttpServletRequest request) {
+//
+//        String user = (String)request.getSession().getAttribute(WebConstant.USER);
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        String dutyDay = simpleDateFormat.format(new Date());
+//        int punchIsValid = empManagerService.validPunch(user, dutyDay);
+//
+//        ModelAndView modelAndView = new ModelAndView("employee/punch");
+//        modelAndView.addObject("punchIsValid", punchIsValid);
+//        return modelAndView;
+//
+//    }
     //获取打卡异常
     @RequestMapping(value = "/viewUnPunch", method = RequestMethod.GET)
     public ModelAndView viewUnPunch(HttpServletRequest request) {
@@ -56,16 +56,7 @@ public class EmployeeController {
         return modelAndView;
 
     }
-    //查看本人历史工资
-    @RequestMapping(value = "/viewEmployeeSalary", method = RequestMethod.GET)
-    public ModelAndView viewEmployeeSalary(HttpServletRequest request) {
-        String user = (String) request.getSession().getAttribute("user");
-        List<PaymentVo> salarys = empManagerService.employeeSalary(user);
-        ModelAndView modelAndView = new ModelAndView("employee/viewSalary");
-        modelAndView.addObject("salarys", salarys);
-        return modelAndView;
 
-    }
 
     /**
      * 上班打卡

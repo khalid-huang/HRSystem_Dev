@@ -44,8 +44,8 @@
                         <td>${app.toAttend}</td>
                         <td>${app.reason}</td>
                         <td>
-                            <a href="checkApp?result=pass&appid=${app.id}">通过</a>
-                            <a href="checkApp?result=deny&appid=${app.id}">拒绝</a>
+                            <a href="checkApp?result=pass&appId=${app.id}">通过</a>
+                            <a href="checkApp?result=deny&appId=${app.id}">拒绝</a>
                         </td>
                 </c:forEach>
             </table>
