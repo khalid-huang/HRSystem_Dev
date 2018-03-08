@@ -115,6 +115,7 @@ public class EmployeeController {
         String user = (String)request.getSession().getAttribute("user");
         System.out.println("---------打卡--------" + user);
         String dutyDay = new java.sql.Date(System.currentTimeMillis()).toString();
+        System.out.println(user + "" + dutyDay + " " + isCome);
         int result = empManagerService.punch(user, dutyDay, isCome);
         String message = "";
         switch (result) {
@@ -128,6 +129,7 @@ public class EmployeeController {
                 message = "打卡成功";
                 break;
         }
+
         return message;
     }
 

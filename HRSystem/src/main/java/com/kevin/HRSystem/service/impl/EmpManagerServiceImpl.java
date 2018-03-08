@@ -34,6 +34,13 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     @Resource
     private PaymentDao paymentDao;
 
+    private Employee findByName(String username) {
+        Employee employee = managerDao.findByName(username);
+        if(null == employee) {
+            employee = employeeDao.findByName(username);
+        }
+        return employee;
+    }
 
     public int validLogin(Employee employee) {
         if(null != managerDao.findByNameAndPass(employee.getName(), employee.getPassword())) {
@@ -102,7 +109,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     @Override
     public int validPunch(String user, String dutyDay) {
         //不能查找到对应的用户，返回无法打卡
-        Employee employee = employeeDao.findByName(user);
+        Employee employee = findByName(user);
         if(null == employee) {
             return NO_PUNCH;
         }
@@ -133,7 +140,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     }
 
     public int punch(String user, String dutyDay, boolean isCome) {
-        Employee employee = employeeDao.findByName(user);
+        Employee employee = findByName(user);
         if(null == employee) {
             return PUNCH_FALT;
         }
@@ -176,7 +183,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     }
 
     public List<PaymentVo> employeeSalary(String employeeName) {
-        Employee employee = employeeDao.findByName(employeeName);
+        Employee employee = findByName(employeeName);
 
         List<Payment> payments = paymentDao.findByEmp(employee);
         System.out.println(payments);
@@ -196,10 +203,10 @@ public class EmpManagerServiceImpl implements EmpManagerService {
      */
     public List<AttendVo> getUnAttend(String employeeName) {
         AttendType type = attendTypeDao.findById(1);
-        Employee employee = employeeDao.findByName(employeeName);
+        Employee employee = findByName(employeeName);
 
         //获取最近三天非正常的出勤记录
-        List<Attend> attends = attendDao.findByEmpunAttend(employee, type);
+        List<Attend> attends = attendDao.findByEmpUnAttend(employee, type);
         List<AttendVo> result = new ArrayList<AttendVo>();
         for(Attend attend : attends) {
             result.add(new AttendVo(attend.getId(), attend.getDutyDay(), attend.getAttendType().getTypeName(), attend.getPunchTime()));

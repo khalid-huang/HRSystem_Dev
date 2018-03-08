@@ -31,15 +31,15 @@
             <td><b>发薪月份</b></td>
             <td><b>薪水</b></td>
         </tr>
-        <c:forEach items="salarys" var="salary" varStatus="vs">
+        <c:forEach items="${requestScope.salarys}" var="salary" varStatus="vs">
             <c:if test="${vs.index%2==0}">
                 <tr style="background-color:#dddddd" class="pt11" height="32">
             </c:if>
             <c:if test="${vs.index%2 == 1}">
                 <tr class="pt11" height="32">
             </c:if>
-                    <td>${salary.payMonth}</td>
-                    <td>${salary.amount}</td>
+                    <td>${salary.getPayMonth()}</td>
+                    <td>${salary.getAmount()}</td>
                 </tr>
         </c:forEach>
     </table>

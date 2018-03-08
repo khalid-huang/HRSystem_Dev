@@ -36,17 +36,17 @@
             <td width="26%"><b>打卡时间</b></td>
             <td width="25%">&nbsp;</td>
         </tr>
-        <c:forEach items="${unAttends}" var="unAttend" varStatus="vs">
+        <c:forEach items="${requestScope.unAttends}" var="unAttend" varStatus="vs">
             <c:if test="${vs.index%2==0}">
                 <tr style="background-color:#dddddd" class="pt11" height="32">
             </c:if>
             <c:if test="${vs.index%2 == 1}">
                 <tr class="pt11" height="32">
             </c:if>
-                    <td>${unAttend.dutyDay}</td>
-                    <td>${unAttend.unType}</td>
-                    <td>${unAttend.time}</td>
-                    <td><a href="appChange?attId=${unAttend.id}">申请改变</a></td>
+                    <td>${unAttend.getDutyDay()}</td>
+                    <td>${unAttend.getUnType()}</td>
+                    <td>${unAttend.getTime()}</td>
+                    <td><a href="appChange?attId=${unAttend.getId()}">申请改变</a></td>
                 </tr>
         </c:forEach>
     </table>

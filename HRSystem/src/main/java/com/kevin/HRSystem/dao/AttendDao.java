@@ -36,5 +36,5 @@ public interface AttendDao extends BaseDao<Attend> {
      */
     Attend findByEmpAndDutyDayAndCome(@Param("employee") Employee employee, @Param("dutyDay") String dutyDay,@Param("isCome") boolean isCome);
 
-    List<Attend> findByEmpunAttend(@Param("employee") Employee employee,@Param("attendType") AttendType attendType);
+    List<Attend> findByEmpUnAttend(@Param("employee") Employee employee,@Param("attendType") AttendType attendType);
 }

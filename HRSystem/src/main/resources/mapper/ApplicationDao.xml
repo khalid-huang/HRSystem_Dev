@@ -15,7 +15,7 @@
     </delete>
 
     <!--查询语句 start -->
-    <select id="findAll">
+    <select id="findAll" resultMap="applicationResultMap">
         SELECT * FROM application_inf
     </select>
 

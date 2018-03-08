@@ -32,20 +32,20 @@
                     <td><b>理由</b></td>
                     <td>&nbsp;</td>
                 </tr>
-                <c:forEach items="apps" var="app" varStatus="vs">
+                <c:forEach items="${requestScope.apps}" var="app" varStatus="vs">
                     <c:if test="vs.index%2==0">
                         <tr style="background-color: #cccccc" class="pt11" height="32">
                     </c:if>
                     <c:if test="vs.index%2==1">
                         <tr class="pt11" height32>
                     </c:if>
-                        <td>${app.emp}</td>
-                        <td>${app.unAttend}</td>
-                        <td>${app.toAttend}</td>
-                        <td>${app.reason}</td>
+                        <td>${app.getEmployee()}</td>
+                        <td>${app.getUnAttend()}</td>
+                        <td>${app.getToAttend()}</td>
+                        <td>${app.getReason()}</td>
                         <td>
-                            <a href="checkApp?result=pass&appId=${app.id}">通过</a>
-                            <a href="checkApp?result=deny&appId=${app.id}">拒绝</a>
+                            <a href="checkApp?result=pass&appId=${app.getId()}">通过</a>
+                            <a href="checkApp?result=deny&appId=${app.getId()}">拒绝</a>
                         </td>
                 </c:forEach>
             </table>

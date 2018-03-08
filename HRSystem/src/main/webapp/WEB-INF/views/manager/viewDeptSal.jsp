@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>查看本部门全部员工</title>
+    <title>经理查看员工上个月工薪水平</title>
 </head>
 <body>
 <%@include file="../header.jsp"%>
@@ -22,26 +22,24 @@
             <table width="80%" border="0" align="center" bgcolor="#cccccc">
                 <tr bgcolor="#e1e1e1">
                     <td colspan="5">
-                        <div class="mytitle">您正在查看部门的全部员工</div>
+                        <div class="mytitle">您正在查看上个月部门的全部薪水状况</div>
                     </td>
                 </tr>
                 <tr class="pt11" height="45">
                     <td><b>员工名</b></td>
-                    <td><b>密码</b></td>
-                    <td><b>工资</b></td>
+                    <td><b>薪水</b></td>
                 </tr>
-                <c:forEach items="${requestScope.emps}" var="emp" varStatus="vs">
-                    <c:if test="vs.index%2==0">
-                        <tr style="background-color: #cccccc" class="pt11" height="32">
-                    </c:if>
-                    <c:if test="vs.index%2==1">
-                        <tr class="pt11" height32>
-                    </c:if>
-                        <td>${emp.getEmployeeName()}</td>
-                        <td>${emp.getEmployeePassword()}</td>
-                        <td>${emp.getAmount()}</td>
-                        </tr>
-                </c:forEach>
+                <c:forEach items="${requestScope.salarys}" var="salary" varStatus="vs">
+                <c:if test="vs.index%2==0">
+                    <tr style="background-color: #cccccc" class="pt11" height="32">
+                </c:if>
+                <c:if test="vs.index%2==1">
+                    <tr class="pt11" height32>
+                </c:if>
+                        <td>${salary.getEmployeeName()}</td>
+                        <td>${salary.getAmount()}</td>
+                    </tr>
+                    </c:forEach>
             </table>
         </td>
     </tr>

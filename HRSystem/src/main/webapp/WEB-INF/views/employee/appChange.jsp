@@ -16,18 +16,18 @@
 <%@include file="../header.jsp"%>
 <%@include file="empheader.jsp"%>
 <table width="960" align="center"
-       background="${pageContext.request.contextPath}/images/bodybg.jpg">
+       background="${pageContext.request.contextPath}/resources/images/bodybg.jpg">
     <tr>
         <td>
             <div align="center">
                 <span>请填写异动申请</span><br>
                 <form action="processApp">
 
-                    <input type="hidden" name="attId" value="${attid}">
+                    <input type="hidden" name="attId" value="${attId}">
                     <label for="type">申请类别</label>
                     <select name="typeId" id="type">
-                        <c:forEach items="types" var="type">
-                            <option value="${types.id}">${types.name}</option>
+                        <c:forEach items="${requestScope.types}" var="type">
+                            <option value="${types.getId()}">${types.getName()}</option>
                         </c:forEach>
                     </select>
                     <label for="reason">申请理由</label>

@@ -32,7 +32,7 @@
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td><s:property value="#session.user"/>
+        <td><%=request.getSession().getAttribute("user")%>
             ，欢迎您使用JavaEE简单工作流系统，您是经理</td>
     </tr>
     <tr height="60">

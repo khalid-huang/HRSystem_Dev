@@ -17,52 +17,51 @@
 
     <!--查询语句 start-->
 
-    <select id="findAll">
-        SELECT * FROM application_inf
+    <select id="findAll" resultMap="employeeResultMap">
+        SELECT * FROM employee_inf
     </select>
 
-    <select id="findById" parameterType="long" resultMap="EmployeeResultMap">
+    <select id="findById" parameterType="long" resultMap="employeeResultMap">
         SELECT * FROM employee_inf WHERE emp_id=#{id}
     </select>
 
-    <select id="findByNameAndPass" resultMap="EmployeeResultMap">
+    <select id="findByNameAndPass" resultMap="employeeResultMap">
         SELECT * FROM  employee_inf WHERE emp_name=#{name} and emp_pass=#{password} and emp_type=1
     </select>
 
-    <select id="findByName" resultMap="EmployeeResultMap">
+    <select id="findByName" resultMap="employeeResultMap">
         SELECT * FROM employee_inf WHERE emp_name=#{name} and emp_type=1
     </select>
 
     <!--根据mgr_id查找员工-->
-    <select id="findEmployeesByMgrId" parameterType="long" resultMap="EmployeeResultMap">
+    <select id="findEmployeesByMgrId" parameterType="long" resultMap="employeeResultMap">
         SELECT * FROM employee_inf WHERE mgr_id=#{id}
     </select>
 
     <!--查询语句 end -->
 
-    <resultMap id ="EmployeeResultMap" type="com.kevin.HRSystem.model.Employee">
+    <resultMap id ="employeeResultMap" type="com.kevin.HRSystem.model.Employee">
         <id property="id" column="emp_id"/>
         <result property="type" column="emp_type"/>
         <result property="name" column="emp_name"/>
         <result property="password" column="emp_pass"/>
         <result property="salary" column="emp_salary"/>
-        <result property="departmentName" column="dept_name"/>
         <association property="manager" javaType="com.kevin.HRSystem.model.Manager">
             <id property="id" column="mgr_id"/>
         </association>
     </resultMap>
 
-    <select id="selectByIdWithForeign" parameterType="long" resultMap="EmployeeWithForeignResultMap">
+
+    <select id="selectByIdWithForeign" parameterType="long" resultMap="employeeWithForeignResultMap">
         SELECT e.emp_id, e.emp_name, e.emp_pass, e.emp_type, e.emp_salary, m.emp_id mgr_id, m.emp_name mgr_name, m.dept_name FROM employee_inf e, employee_inf m WHERE e.mgr_id = m.emp_id and e.emp_id = #{id}
     </select>
 
-    <resultMap id ="EmployeeWithForeignResultMap" type="com.kevin.HRSystem.model.Employee">
+    <resultMap id ="employeeWithForeignResultMap" type="com.kevin.HRSystem.model.Employee">
         <id property="id" column="emp_id"/>
         <result property="type" column="emp_type"/>
         <result property="name" column="emp_name"/>
         <result property="password" column="emp_pass"/>
         <result property="salary" column="emp_salary"/>
-        <result property="departmentName" column="dept_name"/>
         <association property="manager" javaType="com.kevin.HRSystem.model.Manager">
            <id property="id" column="mgr_id"/>
            <result property="name" column="mgr_name"/>

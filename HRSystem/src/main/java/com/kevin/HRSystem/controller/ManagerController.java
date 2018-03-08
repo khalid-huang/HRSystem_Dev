@@ -78,7 +78,7 @@ public class ManagerController {
         String mgr = (String)request.getSession().getAttribute(WebConstant.USER);
         List<SalaryVo> salarys = managerService.getSalarysByManger(mgr);
 
-        ModelAndView modelAndView = new ModelAndView("manager/viewSalary");
+        ModelAndView modelAndView = new ModelAndView("manager/viewDeptSal");
         modelAndView.addObject("salarys", salarys);
         return modelAndView;
     }

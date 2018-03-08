@@ -22,22 +22,23 @@
             <table width="80%" border="0" align="center" bgcolor="#cccccc">
                 <tr bgcolor="#e1e1e1">
                     <td colspan="5">
-                        <div class="mytitle">当前用户：<%=request.getSession().getAttribute("user")%>></div>
+                        <div class="mytitle">当前用户：<%=request.getSession().getAttribute("user")%></div>
                     </td>
                 </tr>
                 <tr class="pt11" height="45">
                     <td><b>发薪月分</b></td>
                     <td><b>薪水</b></td>
                 </tr>
-                <c:forEach items="salarys" var="salary" varStatus="vs">
-                <c:if test="vs.index%2==0">
-                <tr style="background-color: #cccccc" class="pt11" height="32">
+                <c:forEach items="${requestScope.salarys}" var="salary" varStatus="vs">
+                    <c:if test="vs.index%2==0">
+                        <tr style="background-color: #cccccc" class="pt11" height="32">
                     </c:if>
                     <c:if test="vs.index%2==1">
-                <tr class="pt11" height32>
+                        <tr class="pt11" height32>
                     </c:if>
-                    <td>${salary.payMonth}</td>
-                    <td>${salary.amount}</td>
+                            <td>${salary.getPayMonth()}</td>
+                            <td>${salary.getAmount()}</td>
+                        </tr>
                     </c:forEach>
             </table>
         </td>

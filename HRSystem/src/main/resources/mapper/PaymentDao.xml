@@ -17,8 +17,8 @@
     </update>
 
     <!--查询部分 start -->
-    <select id="findAll">
-        SELECT * FROM application_inf
+    <select id="findAll" resultMap="paymentResultMap">
+        SELECT * FROM payment_inf
     </select>
 
     <select id="findById" resultMap="paymentResultMap" parameterType="long">

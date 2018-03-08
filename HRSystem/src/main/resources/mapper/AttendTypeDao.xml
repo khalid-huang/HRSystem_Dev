@@ -16,8 +16,8 @@
     </update>
 
     <!--查询语句 start-->
-    <select id="findAll">
-        SELECT * FROM application_inf
+    <select id="findAll" resultMap="attendTypeResultMap">
+        SELECT * FROM attend_type_inf
     </select>
 
 

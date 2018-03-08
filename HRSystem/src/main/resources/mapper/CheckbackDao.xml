@@ -13,12 +13,12 @@
     </delete>
 
     <update id="update" parameterType="Checkback">
-        UPDATE checkback_inf set app_id=#{application.id}, check_result=#{checkResult}, check_reason=#{checkReason}, mgr_id=#{manager.id}
+        UPDATE checkback_inf set app_id=#{application.id}, check_result=#{checkResult}, check_reason=#{checkReason}, mgr_id=#{manager.id} WHERE check_id=#{id}
     </update>
 
     <!--查询语句 start -->
-    <select id="findAll">
-        SELECT * FROM application_inf
+    <select id="findAll" resultMap="checkBackResultMap">
+        SELECT * FROM checkback_inf
     </select>
 
     <select id="findById" resultMap="checkBackResultMap" parameterType="long">

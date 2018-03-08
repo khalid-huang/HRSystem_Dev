@@ -16,8 +16,8 @@
     </update>
 
     <!--查询语句 start-->
-    <select id="findAll">
-        SELECT * FROM application_inf
+    <select id="findAll" resultMap="ManagerResultMap">
+        SELECT * FROM employee_inf
     </select>
 
     <select id="findById" parameterType="long" resultMap="ManagerResultMap">

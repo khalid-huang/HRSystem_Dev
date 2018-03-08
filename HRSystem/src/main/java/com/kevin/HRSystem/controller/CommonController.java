@@ -100,7 +100,7 @@ public class CommonController {
     }
 
     //查看本人历史工资
-    @RequestMapping(value = {"/viewEmployeeSalary", "/viewManagerSalary"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"viewEmployeeSalary", "viewManagerSalary"}, method = RequestMethod.GET)
     public ModelAndView viewEmployeeSalary(HttpServletRequest request) {
         String user = (String) request.getSession().getAttribute("user");
 
@@ -108,7 +108,9 @@ public class CommonController {
 
         List<PaymentVo> salarys = empManagerService.employeeSalary(user);
         ModelAndView modelAndView;
-        if(request.getServletPath().equals("viewEmployeeSalary")) {
+        System.out.println(salarys.size());
+        System.out.println(request.getServletPath());
+        if(request.getServletPath().equals("/viewEmployeeSalary")) {
             modelAndView = new ModelAndView("employee/viewSalary");
         } else {
             modelAndView = new ModelAndView("manager/viewSalary");
