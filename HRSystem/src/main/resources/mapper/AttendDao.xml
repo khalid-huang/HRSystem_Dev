@@ -12,8 +12,12 @@
         DELETE from attend_inf WHERE attend_id=#{id}
     </delete>
 
-    <update id="update" parameterType="User">
+    <update id="update" parameterType="Attend">
         UPDATE attend_inf SET duty_day=#{dutyDay}, punch_time=#{punchTime}, is_come=#{isCome}, type_id=#{attendType.id}, emp_id=#{employee.id} WHERE  attend_id=#{id}
+    </update>
+
+    <update id="updateAttendType" parameterType="Attend">
+        UPDATE attend_inf SET type_id=#{attendType.id} WHERE  attend_id=#{id}
     </update>
 
     <!--查询语句 start -->

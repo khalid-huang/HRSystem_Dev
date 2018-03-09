@@ -60,6 +60,13 @@ public class Attend {
 
     @Override
     public String toString() {
-        return "Attend [id=" + this.getId() + ", duty_day=" + this.getDutyDay() + " , punch_time=" + this.getPunchTime() + ", is_come=" + this.isCome();
+        return "Attend{" +
+                "id=" + id +
+                ", dutyDay='" + dutyDay + '\'' +
+                ", punchTime=" + punchTime +
+                ", isCome=" + isCome +
+                ", attendType=" + attendType +
+                ", employee=" + employee +
+                '}';
     }
 }

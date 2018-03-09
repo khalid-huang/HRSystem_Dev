@@ -4,7 +4,7 @@ public class Checkback {
     private long id;
     private Application application;
     private boolean checkResult;
-    private String checkReason;
+//    private String checkReason;
     private Manager manager;
 
     public long getId() {
@@ -31,13 +31,13 @@ public class Checkback {
         this.checkResult = checkResult;
     }
 
-    public String getCheckReason() {
-        return checkReason;
-    }
+//    public String getCheckReason() {
+//        return checkReason;
+//    }
 
-    public void setCheckReason(String checkReason) {
-        this.checkReason = checkReason;
-    }
+//    public void setCheckReason(String checkReason) {
+//        this.checkReason = checkReason;
+//    }
 
     public Employee getManager() {
         return manager;
@@ -45,5 +45,15 @@ public class Checkback {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    @Override
+    public String toString() {
+        return "Checkback{" +
+                "id=" + id +
+                ", application=" + application +
+                ", checkResult=" + checkResult +
+                ", manager=" + manager +
+                '}';
     }
 }

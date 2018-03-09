@@ -24,7 +24,7 @@
     </select>
 
     <select id="findByEmp" parameterType="com.kevin.HRSystem.model.Employee" resultMap="applicationWithTypeNameResultMap">
-        SELECT * FROM application_inf app, attend_inf att WHERE att.emp_id = #{id} and app.attend_id = att.attend_id
+        SELECT app.app_id, app.app_reason, app.app_result, toati.type_id to_type_id, toati.type_name to_type_name, att.attend_id, unati.type_name un_type_name, unati.type_id un_type_id FROM application_inf app, attend_inf att, attend_type_inf unati, attend_type_inf toati WHERE att.emp_id = #{id} and app.type_id=toati.type_id and app.attend_id = att.attend_id and att.type_id = unati.type_id
     </select>
 
     <!--查询语句 end -->

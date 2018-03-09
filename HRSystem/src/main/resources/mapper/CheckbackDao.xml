@@ -5,7 +5,7 @@
 <mapper namespace="com.kevin.HRSystem.dao.CheckbackDao">
 
     <insert id="save" parameterType="Checkback" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO checkback_inf(app_id, check_result, check_reason, mgr_id) VALUES  #(#{application.id}, #{checkResult}, #{checkReason},#{manager.id})
+        INSERT INTO checkback_inf(app_id, check_result, mgr_id) VALUES  (#{application.id}, #{checkResult}, #{manager.id})
     </insert>
 
     <delete id="delete" parameterType="long">
@@ -13,7 +13,7 @@
     </delete>
 
     <update id="update" parameterType="Checkback">
-        UPDATE checkback_inf set app_id=#{application.id}, check_result=#{checkResult}, check_reason=#{checkReason}, mgr_id=#{manager.id} WHERE check_id=#{id}
+        UPDATE checkback_inf set app_id=#{application.id}, check_result=#{checkResult}, mgr_id=#{manager.id} WHERE check_id=#{id}
     </update>
 
     <!--查询语句 start -->

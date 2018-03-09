@@ -91,6 +91,11 @@ public class HRSystemApplicationTest {
         Employee employee = employeeDao.findById(3);
         List<Application> applications = applicationDao.findByEmp(employee);
         System.out.println(applications.size());
+        if(applications.size() > 0) {
+            Application application = applications.get(0);
+            System.out.println("unAttendTypeName: " + application.getAttend().getAttendType().getTypeName());
+            System.out.println("toAttendTypeName" + application.getAttendType().getTypeName());
+        }
 //        Application application = applicationDao.selectApplicationByID(id);
 //        System.out.println(application.getAttendType());
 //        Application application = new Application();

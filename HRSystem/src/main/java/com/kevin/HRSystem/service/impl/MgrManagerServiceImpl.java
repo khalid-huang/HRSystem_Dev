@@ -147,13 +147,16 @@ public class MgrManagerServiceImpl implements MgrManagerService {
             //修改出勤的类型
             Attend attend = application.getAttend();
             attend.setAttendType(application.getAttendType());
-            attendDao.update(attend);
+            System.out.println("MgrManagerServiceImpl: ");
+            System.out.println(attend);
+            attendDao.updateAttendType(attend);
         } else {
             //没有通过申请
             checkback.setCheckResult(false);
             application.setApplicationResult(true);
             applicationDao.update(application);
         }
+        System.out.println(checkback);
         checkbackDao.save(checkback);
     }
 }
