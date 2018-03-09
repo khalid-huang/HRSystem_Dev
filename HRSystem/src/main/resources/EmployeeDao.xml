@@ -4,17 +4,8 @@
 
 <mapper namespace="com.kevin.HRSystem.dao.EmployeeDao">
     <insert id="save" parameterType="Employee" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO employee_inf(emp_type, emp_name, emp_pass, emp_salary, mgr_id, dept_name) VALUES (#{type}, #{name}, #{password}, #{salary}, #{manager.id}, #{departmentName})
+        INSERT INTO employee_inf(emp_type, emp_name, emp_pass, emp_salary, mgr_id, dept_name) VALUES (#{type}, #{name}, #{password}, #{saraly}, #{manager.id}, #{departmentName})
     </insert>
-
-    <insert id="saveAsEmployee" parameterType="Employee" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO employee_inf(emp_type, emp_name, emp_pass, emp_salary, mgr_id) VALUES (#{type}, #{name}, #{password}, #{salary}, #{manager.id})
-    </insert>
-
-    <insert id="saveAsManager" parameterType="Manager" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO employee_inf(emp_type, emp_name, emp_pass, emp_salary, dept_name) VALUES (#{type}, #{name}, #{password}, #{salary}, #{departmentName})
-    </insert>
-
 
     <delete id="delete" parameterType="long">
         DELETE FROM employee_inf WHERE emp_id=#{id}
@@ -35,11 +26,11 @@
     </select>
 
     <select id="findByNameAndPass" resultMap="employeeResultMap">
-        SELECT * FROM  employee_inf WHERE emp_name=#{name} and emp_pass=#{password}
+        SELECT * FROM  employee_inf WHERE emp_name=#{name} and emp_pass=#{password} and emp_type=1
     </select>
 
     <select id="findByName" resultMap="employeeResultMap">
-        SELECT * FROM employee_inf WHERE emp_name=#{name}
+        SELECT * FROM employee_inf WHERE emp_name=#{name} and emp_type=1
     </select>
 
     <!--根据mgr_id查找员工-->
@@ -49,32 +40,16 @@
 
     <!--查询语句 end -->
 
-    <!-- resultMap设置，使用鉴别器来区分employee和manager-->
     <resultMap id ="employeeResultMap" type="com.kevin.HRSystem.model.Employee">
         <id property="id" column="emp_id"/>
         <result property="type" column="emp_type"/>
         <result property="name" column="emp_name"/>
         <result property="password" column="emp_pass"/>
         <result property="salary" column="emp_salary"/>
-        <discriminator javaType="int" column="emp_type">
-            <case value="1" resultMap="originalEmployeeResultMap"/>
-            <case value="2" resultMap="managerResultMap"/>
-        </discriminator>
-    </resultMap>
-
-
-    <resultMap id="originalEmployeeResultMap" type="com.kevin.HRSystem.model.Employee" extends="employeeResultMap">
         <association property="manager" javaType="com.kevin.HRSystem.model.Manager">
             <id property="id" column="mgr_id"/>
         </association>
     </resultMap>
-
-    <resultMap id="managerResultMap" type="com.kevin.HRSystem.model.Manager" extends="employeeResultMap">
-        <result property="departmentName" column="dept_name"/>
-        <collection property="employees" column="emp_id" ofType="com.kevin.HRSystem.model.Employee" select="com.kevin.HRSystem.dao.EmployeeDao.findEmployeesByMgrId"/>
-    </resultMap>
-
-    <!--基础resultMap end-->
 
 
     <select id="selectByIdWithForeign" parameterType="long" resultMap="employeeWithForeignResultMap">

@@ -11,6 +11,7 @@ public class PunchJob extends QuartzJobBean {
     //判断作业是否执行的标志
     private boolean isRunning = false;
 
+    @Resource
     private EmpManagerService empManagerService;
 
     public void setEmpManagerService(EmpManagerService empManagerService) {
@@ -20,9 +21,10 @@ public class PunchJob extends QuartzJobBean {
     public void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
         if(!isRunning) {
             System.out.println("开始调度自动打卡");
-            isRunning = false;
-            empManagerService.autoPunch();
             isRunning = true;
+            empManagerService.autoPunch();
+            System.out.println("打卡结束");
+            isRunning = false;
         }
     }
 }

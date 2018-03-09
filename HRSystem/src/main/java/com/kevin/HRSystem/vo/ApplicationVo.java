@@ -65,4 +65,15 @@ public class ApplicationVo implements Serializable {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+    @Override
+    public String toString() {
+        return "ApplicationVo{" +
+                "id=" + id +
+                ", employee='" + employee + '\'' +
+                ", unAttend='" + unAttend + '\'' +
+                ", toAttend='" + toAttend + '\'' +
+                ", reason='" + reason + '\'' +
+                '}';
+    }
 }

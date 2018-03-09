@@ -9,14 +9,27 @@
           p:cronExpression="0 0 2 3 * ? *">
         <property name="jobDetail">
             <!--使用嵌套Bean的方法来定义任务Bean，jobClass指定任务bean的实现类-->
-            <bean class="org.springframework.scheduling.quartz.JobDetailFactoryBean" p:jobClass="com.kevin.HRSystem.schedule.PayJob" p:durability="true" />
+            <bean class="org.springframework.scheduling.quartz.JobDetailFactoryBean" p:jobClass="com.kevin.HRSystem.schedule.PayJob" p:durability="true" >
+                <property name="jobDataAsMap">
+                    <map>
+                        <entry key="empManagerService" value-ref="EmpManagerService"/>
+                    </map>
+                </property>
+            </bean>
         </property>
     </bean>
 
     <!--定义触发器来管理任务 Bean cronExpression指定Cron表达式： 周一到周五7点和12点执行调度-->
     <bean id="cronTriggerPunch" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" p:cronExpression="0 0 7,12 ? * MON-FRI">
         <property name="jobDetail">
-            <bean class="org.springframework.scheduling.quartz.JobDetailFactoryBean" p:jobClass="com.kevin.HRSystem.schedule.PunchJob" p:durability="true"/>
+            <bean class="org.springframework.scheduling.quartz.JobDetailFactoryBean" p:jobClass="com.kevin.HRSystem.schedule.PunchJob" p:durability="true">
+                <property name="jobDataAsMap">
+                    <map>
+                        <entry key="empManagerService" value-ref="EmpManagerService"/>
+                    </map>
+                </property>
+            </bean>
+
         </property>
     </bean>
 

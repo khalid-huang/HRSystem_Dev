@@ -91,6 +91,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/processApp", method = RequestMethod.POST)
     public ModelAndView processApp(String attId, String typeId, String reason) {
+        System.out.println(attId + " " + typeId + " " + reason);
         boolean result = empManagerService.addApplication(Integer.parseInt(attId), Integer.parseInt(typeId), reason);
         String message = "";
         if(result) {

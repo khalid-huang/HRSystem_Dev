@@ -2,10 +2,10 @@ package com.kevin.HRSystem.model;
 
 public class Application {
     private long id;
-    private Attend attend;
+    private Attend attend; //相关联的出勤记录
     private String applicationReason;
     private boolean applicationResult;
-    private AttendType attendType;
+    private AttendType attendType; //需要申请得到的出勤记录
 
     public long getId() {
         return id;

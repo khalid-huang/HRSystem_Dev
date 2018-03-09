@@ -4,6 +4,7 @@ import com.kevin.HRSystem.constant.WebConstant;
 import com.kevin.HRSystem.model.Employee;
 import com.kevin.HRSystem.service.EmpManagerService;
 import com.kevin.HRSystem.service.MgrManagerService;
+import com.kevin.HRSystem.vo.ApplicationVo;
 import com.kevin.HRSystem.vo.SalaryVo;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,11 @@ public class ManagerController {
     @RequestMapping(value = "viewApp", method = RequestMethod.GET)
     public ModelAndView viewApp(HttpServletRequest request) {
         String user = (String)request.getSession().getAttribute(WebConstant.USER);
-        List apps = managerService.getApplicationsByManager(user);
+        List<ApplicationVo> apps = managerService.getApplicationsByManager(user);
+        System.out.println("manager:viewApp:apps:" + apps.size());
+        if(apps.size() > 0) {
+            System.out.println(apps.get(0));
+        }
         ModelAndView modelAndView = new ModelAndView("manager/viewApp");
         modelAndView.addObject("apps", apps);
         return modelAndView;

@@ -21,17 +21,19 @@
         <td>
             <div align="center">
                 <span>请填写异动申请</span><br>
-                <form action="processApp">
-
+                <form action="processApp" method="post">
                     <input type="hidden" name="attId" value="${attId}">
                     <label for="type">申请类别</label>
                     <select name="typeId" id="type">
                         <c:forEach items="${requestScope.types}" var="type">
-                            <option value="${types.getId()}">${types.getName()}</option>
+                            <option value="${type.getId()}">${type.getTypeName()}</option>
                         </c:forEach>
                     </select>
+                    <br>
                     <label for="reason">申请理由</label>
                     <textarea name="reason" id="reason" cols="30" rows="5"></textarea>
+                    <br>
+                    <input type="submit" value="提交">
                     <input type="reset" value="重新填写">
                 </form>
             </div>

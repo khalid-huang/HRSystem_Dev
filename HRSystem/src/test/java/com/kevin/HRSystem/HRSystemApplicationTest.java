@@ -52,15 +52,27 @@ public class HRSystemApplicationTest {
 //        Employee employee = employeeDao.findById(e_id);
 //        System.out.println(employee.getManager().getId());
 ////        System.out.println(employee.toString());
+//          List<Employee> employees = employeeDao.findAll();
+//        for (Employee employee : employees) {
+//            System.out.println(employee);
+//        }
 //
+//        Employee employee = employeeDao.findById(1);
+//        if(employee instanceof Manager) {
+//            System.out.println("manager");
+//            Manager manager = (Manager) employee;
+//            System.out.println(manager.getEmployees().size());
+//        }
+
 //        //测试getUnAttend
 //        List<AttendVo> unAttends = empManagerService.getUnAttend(employee.getName());
 //        System.out.println(unAttends.get(0).getUnType());
 //        System.out.println(unAttends.get(0).getDutyDay());
 //        System.out.println(unAttends.size());
 
-        empManagerService.autoPunch();
-
+        //自动调度接口测试
+//        empManagerService.autoPunch();
+//        empManagerService.autoPay();
 
         //测试attend
 //        long attend_id = 1;
@@ -75,7 +87,10 @@ public class HRSystemApplicationTest {
 //        attend.setAttendType(attendType);
 //        attendDao.update(attend);
 
-
+          //Application测试
+        Employee employee = employeeDao.findById(3);
+        List<Application> applications = applicationDao.findByEmp(employee);
+        System.out.println(applications.size());
 //        Application application = applicationDao.selectApplicationByID(id);
 //        System.out.println(application.getAttendType());
 //        Application application = new Application();

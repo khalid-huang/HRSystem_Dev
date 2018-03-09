@@ -19,18 +19,18 @@
     <tr>
         <td>请输入新员工的资料：</td>
         <div align="center">
-            <form action="processAddEmployee"></form>
-            <label for="name">员工用户名</label>
-            <input type="text" id="name" name="name">
-            <br>
-            <label for="password">员工密码</label>
-            <input type="text" id="password" name="password">
-            <br>
-            <label for="salary">员工月薪</label>
-            <input type="text" id="salary" name="salary">
-            <input type="submit" value="添加新员工">
-            <input type="reset" value="重新输入">
-            </td>
+            <form action="processAddEmployee" method="post">
+                <label for="name">员工用户名</label>
+                <input type="text" id="name" name="name">
+                <br>
+                <label for="password">员工密码</label>
+                <input type="text" id="password" name="password">
+                <br>
+                <label for="salary">员工月薪</label>
+                <input type="text" id="salary" name="salary">
+                <input type="submit" value="添加新员工">
+                <input type="reset" value="重新输入">
+            </form>
         </div>
     </tr>
 </table>

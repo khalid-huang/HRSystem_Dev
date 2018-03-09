@@ -3,7 +3,7 @@
 
 <mapper namespace="com.kevin.HRSystem.dao.ApplicationDao">
     <insert id="save" parameterType="Application" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO application_inf(app_result,attend_id,type_id) VALUES (#{applicationReason}, #{applicationResult} #{attent.id}, #{attentType.id})
+        INSERT INTO application_inf(app_reason,app_result,attend_id,type_id) VALUES (#{applicationReason}, #{applicationResult}, #{attend.id}, #{attendType.id})
     </insert>
 
     <update id="update" parameterType="Application">
@@ -23,8 +23,8 @@
         SELECT * FROM application_inf WHERE app_id=#{id}
     </select>
 
-    <select id="findByEmp" parameterType="com.kevin.HRSystem.model.Employee" resultMap="applicationWithDetailResultMap">
-        SELECT * FROM application_inf app, attend_inf att, employee_inf emp WHERE emp.emp_id=#{id} and emp.emp_id = att.emp_id = emp.emp_id and app.attend_id = att.attend_id
+    <select id="findByEmp" parameterType="com.kevin.HRSystem.model.Employee" resultMap="applicationWithTypeNameResultMap">
+        SELECT * FROM application_inf app, attend_inf att WHERE att.emp_id = #{id} and app.attend_id = att.attend_id
     </select>
 
     <!--查询语句 end -->
@@ -35,32 +35,27 @@
         <result property="applicationReason" column="app_reason"/>
         <result property="applicationResult" column="app_result"/>
         <association property="attendType" javaType="AttendType">
-            <id property="id" column="attend_id"/>
+            <id property="id" column="type_id"/>
         </association>
         <association property="attend" javaType="Attend">
-            <id property="id" column="type_id"/>
+            <id property="id" column="attend_id"/>
         </association>
     </resultMap>
 
-    <resultMap type="Application" id="applicationWithDetailResultMap">
+    <resultMap type="Application" id="applicationWithTypeNameResultMap">
         <id property="id" column="app_id"/>
         <result property="applicationReason" column="app_reason"/>
         <result property="applicationResult" column="app_result"/>
         <association property="attendType" javaType="AttendType">
-            <id property="id" column="type_id"/>
-            <result property="amerceAmount" column="amerce_amount"/>
-            <result property="typeName" column="type_name"/>
+            <id property="id" column="to_type_id"/>
+            <!--<result property="amerceAmount" column="to_amerce_amount"/>-->
+            <result property="typeName" column="to_type_name"/>
         </association>
         <association property="attend" javaType="Attend">
             <id property="id" column="attend_id"/>
-            <result property="dutyDay" column="duty_day"/>
-            <result property="punchTime" column="punch_time"/>
-            <result property="isCome" column="is_come"/>
-            <association property="attendType" javaType="AttendType">
-                <id property="id" column="type_id"/>
-            </association>
-            <association property="employee" javaType="Employee">
-                <id property="id" column="emp_id"/>
+            <association property="attendType" javaType="com.kevin.HRSystem.model.AttendType">
+                <id property="id" column="un_type_id"/>
+                <result property="typeName" column="un_type_name"/>
             </association>
         </association>
     </resultMap>

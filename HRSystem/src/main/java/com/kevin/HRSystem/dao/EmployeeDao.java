@@ -1,6 +1,7 @@
 package com.kevin.HRSystem.dao;
 
 import com.kevin.HRSystem.model.Employee;
+import com.kevin.HRSystem.model.Manager;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.EnumMap;
@@ -18,4 +19,8 @@ public interface EmployeeDao extends BaseDao<Employee>{
     public Employee findByName(@Param("name")String name);
 
     public List<Employee> findEmployeesByMgrId(@Param("id") long id);
+
+    public void saveAsEmployee(Employee employee);
+
+    public void saveAsManager(Manager manager);
 }

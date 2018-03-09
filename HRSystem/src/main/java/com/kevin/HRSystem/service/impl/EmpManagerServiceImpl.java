@@ -30,29 +30,21 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     @Resource
     private EmployeeDao employeeDao;
     @Resource
-    private ManagerDao managerDao;
-    @Resource
     private PaymentDao paymentDao;
 
-    private Employee findByName(String username) {
-        Employee employee = managerDao.findByName(username);
-        if(null == employee) {
-            employee = employeeDao.findByName(username);
-        }
-        return employee;
-    }
-
     public int validLogin(Employee employee) {
-        if(null != managerDao.findByNameAndPass(employee.getName(), employee.getPassword())) {
-            System.out.println("EmpManagerService: manager");
-            System.out.println(employee);
-            return LOGIN_MGR;
-        }
 
-        if(null != employeeDao.findByNameAndPass(employee.getName(), employee.getPassword())) {
-            System.out.println("EmpManagerService:employee");
-            System.out.println(employee);
-            return LOGIN_EMP;
+        Employee employee1 = employeeDao.findByNameAndPass(employee.getName(), employee.getPassword());
+        if(null != employee1) {
+            if(employee1 instanceof Manager) {
+                System.out.println("EmpManagerService: manager");
+                System.out.println(employee);
+                return LOGIN_MGR;
+            } else {
+                System.out.println("EmpManagerService:employee");
+                System.out.println(employee);
+                return LOGIN_EMP;
+            }
         }
 
         return LOGIN_FALT;
@@ -60,9 +52,11 @@ public class EmpManagerServiceImpl implements EmpManagerService {
 
     public void autoPunch() {
         List<Employee> employees = employeeDao.findAll();
+        System.out.println(employees.size());
         //获取当前时间
         String dutyDay = new java.sql.Date(System.currentTimeMillis()).toString();
         for(Employee employee : employees) {
+            System.out.println(employee);
             //先设置出勤类型为旷工，然后真正出勤的时候由员工去修改出勤的状态
             //6表示旷工；已经插入数据库了; 这里最好弄一个常量管理类；但为了方便先这样吧
             AttendType attendType = attendTypeDao.findById(6);
@@ -109,7 +103,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     @Override
     public int validPunch(String user, String dutyDay) {
         //不能查找到对应的用户，返回无法打卡
-        Employee employee = findByName(user);
+        Employee employee = employeeDao.findByName(user);
         if(null == employee) {
             return NO_PUNCH;
         }
@@ -140,7 +134,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     }
 
     public int punch(String user, String dutyDay, boolean isCome) {
-        Employee employee = findByName(user);
+        Employee employee = employeeDao.findByName(user);
         if(null == employee) {
             return PUNCH_FALT;
         }
@@ -183,7 +177,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
     }
 
     public List<PaymentVo> employeeSalary(String employeeName) {
-        Employee employee = findByName(employeeName);
+        Employee employee = employeeDao.findByName(employeeName);
 
         List<Payment> payments = paymentDao.findByEmp(employee);
         System.out.println(payments);
@@ -203,7 +197,7 @@ public class EmpManagerServiceImpl implements EmpManagerService {
      */
     public List<AttendVo> getUnAttend(String employeeName) {
         AttendType type = attendTypeDao.findById(1);
-        Employee employee = findByName(employeeName);
+        Employee employee = employeeDao.findByName(employeeName);
 
         //获取最近三天非正常的出勤记录
         List<Attend> attends = attendDao.findByEmpUnAttend(employee, type);

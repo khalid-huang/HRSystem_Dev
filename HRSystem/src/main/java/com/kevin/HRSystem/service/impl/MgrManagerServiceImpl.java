@@ -29,27 +29,36 @@ public class MgrManagerServiceImpl implements MgrManagerService {
     @Resource
     private EmployeeDao employeeDao;
     @Resource
-    private ManagerDao managerDao;
-    @Resource
     private PaymentDao paymentDao;
 
-    public void addEmployee(Employee employee, String manager) throws HrException {
-        Manager m = managerDao.findByName(manager);
-        if(m == null) {
+    private Manager findByName(String username) {
+        Employee tempEmployee = employeeDao.findByName(username);
+        if(null != tempEmployee && tempEmployee instanceof Manager) {
+            return (Manager)tempEmployee;
+        } else {
+            return null;
+        }
+    }
+
+    public void addEmployee(Employee employee, String username) throws HrException {
+        Manager manager = findByName(username);
+        if(null != manager) {
+            employee.setType(1);
+            employee.setManager(manager);
+            employeeDao.saveAsEmployee(employee);
+        } else {
             throw new HrException("您是经理吗？或您还没有登录？");
         }
-        employee.setManager(m);
-        employeeDao.save(employee);
     }
 
     //获取上个月的全部工资记录
-    public List<SalaryVo> getSalarysByManger(String manager) {
-        Manager m = managerDao.findByName(manager);
-        if(m == null) {
+    public List<SalaryVo> getSalarysByManger(String username) {
+        Manager manager = findByName(username);
+        if(manager == null) {
             throw new HrException("您是经理吗？或您还没有登录");
         }
         //查询该经理对应的所有员工
-        List<Employee> employees = m.getEmployees();
+        List<Employee> employees = manager.getEmployees();
         if(employees == null || employees.size() < 1) {
             throw new HrException("您的部门没有员工");
         }
@@ -69,15 +78,15 @@ public class MgrManagerServiceImpl implements MgrManagerService {
 
     /**
      * 根据经理返回该部门的全部员工
-     * @param manager 经理名
+     * @param username 经理名
      * @return
      */
-    public List<EmployeeVo> getEmployeesByManager(String manager) {
-        Manager m = managerDao.findByName(manager);
-        if(m == null) {
+    public List<EmployeeVo> getEmployeesByManager(String username) {
+        Manager manager = findByName(username);
+        if(manager == null) {
             throw new HrException("您是经理吗？或您未登录");
         }
-        List<Employee> employees = m.getEmployees();
+        List<Employee> employees = manager.getEmployees();
         if(employees == null || employees.size() < 1) {
             throw new HrException("您的部门没有员工");
         }
@@ -90,24 +99,26 @@ public class MgrManagerServiceImpl implements MgrManagerService {
 
     /**
      * 根据经理返回部门的没有批复的申请
-     * @param manager 经理名
+     * @param username 经理名
      * @return
      */
-    public List<ApplicationVo> getApplicationsByManager(String manager) {
-        Manager m = managerDao.findByName(manager);
-        if(m == null) {
+    public List<ApplicationVo> getApplicationsByManager(String username) {
+        Manager manager = findByName(username);
+        if(manager == null) {
             throw new HrException("您是经理吗？或您还没有登录");
         }
-        List<Employee> employees = m.getEmployees();
+        List<Employee> employees = manager.getEmployees();
         if(employees == null || employees.size() < 1) {
             throw new HrException("您没有员工");
         }
         List<ApplicationVo> result = new ArrayList<ApplicationVo>();
         for(Employee employee : employees) {
             List<Application> applications = applicationDao.findByEmp(employee);
+//            System.out.println("employeeName: " + employee.getName());
+//            System.out.println("mgrManagerSericeImpl: getApplication: applicatoins:" + applications.size());
             if(applications != null && applications.size() > 0) {
                 for(Application application: applications) {
-                    if(application.isApplicationResult() == false) {
+                    if(!application.isApplicationResult()) {
                         Attend attend = application.getAttend();
                         result.add(new ApplicationVo(application.getId(), employee.getName(), attend.getAttendType().getTypeName(), application.getAttendType().getTypeName(), application.getApplicationReason()));
                     }
@@ -118,12 +129,12 @@ public class MgrManagerServiceImpl implements MgrManagerService {
     }
 
     //处理申请
-    public void check(long applicationId, String managerName, boolean result) {
+    public void check(long applicationId, String username, boolean result) {
         Application application = applicationDao.findById(applicationId);
         Checkback checkback = new Checkback();
         checkback.setApplication(application);
 
-        Manager manager = managerDao.findByName(managerName);
+        Manager manager = findByName(username);
         if(manager == null) {
             throw new HrException("您是经理吗？或您还没有登录");
         }

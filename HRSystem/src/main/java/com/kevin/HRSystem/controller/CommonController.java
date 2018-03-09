@@ -88,7 +88,7 @@ public class CommonController {
         int punchIsValid = empManagerService.validPunch(user, dutyDay);
 
         ModelAndView modelAndView;
-        if(request.getServletPath().equals("employeePunch")) {
+        if(request.getServletPath().equals("/employeePunch")) {
             modelAndView = new ModelAndView("employee/punch");
         } else {
             modelAndView = new ModelAndView("manager/punch");
