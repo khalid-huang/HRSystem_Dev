@@ -2,10 +2,10 @@ package com.kevin.HRSystem.model;
 
 public class Application {
     private long id;
-    private Attend attend; //相关联的出勤记录
+    private Attend attend; //相关联的出勤记录(需要申请改变的出勤记录，比如事假)
     private String applicationReason;
     private boolean applicationResult;
-    private AttendType attendType; //需要申请得到的出勤记录
+    private AttendType attendType; //需要申请得到的出勤记录（需要得到的记录，比如从上面的事假到正常）
 
     public long getId() {
         return id;

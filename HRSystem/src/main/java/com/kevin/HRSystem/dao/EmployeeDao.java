@@ -4,7 +4,6 @@ import com.kevin.HRSystem.model.Employee;
 import com.kevin.HRSystem.model.Manager;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.EnumMap;
 import java.util.List;
 
 public interface EmployeeDao extends BaseDao<Employee>{

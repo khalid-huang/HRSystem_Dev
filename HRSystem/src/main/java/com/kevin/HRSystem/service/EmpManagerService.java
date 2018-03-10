@@ -11,7 +11,7 @@ import java.util.List;
 public interface EmpManagerService {
 
     /**
-     * 以经理身份来验证登录
+     * 验证登录
      * @param employee 登录的身份
      * @return
      *  登录后的身份确认：0为登录失败，1为登录emp，2为登录mgr
@@ -30,7 +30,7 @@ public interface EmpManagerService {
     void autoPay();
 
     /**
-     * 验证某个员工是否可以打卡
+     * 验证某个员工是否可以打卡, 以及打卡的类型，上班打卡，还是下班打卡
      * @param user 员工名
      * @param dutyDay 日期
      * @return 可打卡的类别
